@@ -1,0 +1,15 @@
+#!/usr/bin/env docker build . --tag shellcheck:latest --file
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y shellcheck && apt-get clean
+
+WORKDIR pwd
+
+ENTRYPOINT [ "shellcheck" ]

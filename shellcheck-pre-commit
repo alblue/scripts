@@ -1,0 +1,29 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# This runs a pre-commit hook on all files in a git repository that are
+# executable and have a shebang, by running it through shellcheck Any problems
+# are reported to stdout, and the commit is not created.
+#
+# To install, symlink (or copy) this script to `.git/hooks/pre-commit` and the
+# `shellcheck` script into the same directory.
+
+[ true = "$(git config --default true --type bool --get alblue.shellcheck.enabled)" ] || exit 0
+
+for file in $(git ls-files -c)
+do
+  if [ -x "${file}" ]
+  then
+    shebang=$(head -c 2 "${file}")
+    if [ "${shebang}" = "#!" ]
+    then
+	  set -- "$@" "${file}"
+    fi
+  fi
+done
+
+"$(dirname "$0")/shellcheck" "$@"
