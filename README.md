@@ -24,6 +24,7 @@ docker image locally; these will be used to automatically populate the docker
 images on first use.
 
 Git hooks are available for certain commands; `command-pre-commit` can be
-symlinked into a `.git/hooks/pre-commit` type directory.
+symlinked into `.git/hooks/pre-commit` for example.
 
+* [ctags] - Generate ctags automatically when switching branches
 * [shellcheck] - Provides a wrapper around Ubuntu's shellcheck

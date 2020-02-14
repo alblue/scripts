@@ -1,0 +1,12 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# This runs a post-checkout hook on all files to regenerate the tags
+
+[ true = "$(git config --default true --type bool --get alblue.shellcheck.enabled)" ] || exit 0
+
+"$(dirname "$0")"/ctags-update > /dev/null 2> /dev/null &

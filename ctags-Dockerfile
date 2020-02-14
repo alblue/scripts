@@ -1,0 +1,15 @@
+#!/usr/bin/env docker build . --tag ctags:latest --file
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+
+FROM ubuntu:18.04
+
+RUN apt update && apt install -y exuberant-ctags && apt clean
+
+WORKDIR pwd
+
+ENTRYPOINT [ "ctags" ]
