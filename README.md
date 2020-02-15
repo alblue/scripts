@@ -36,4 +36,5 @@ symlinked into `.git/hooks/pre-commit` for example.
 
 * [ctags] - Generate ctags automatically when switching branches
 * [jq] - Command-line JSON processor
+* [perf] - Allows perf commands to be run under a Docker image
 * [shellcheck] - Provides a wrapper around Ubuntu's shellcheck

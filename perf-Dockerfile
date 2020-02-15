@@ -1,0 +1,44 @@
+#!/usr/bin/env docker build . --tag perf:latest --file
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Runs perf from a docker image
+#
+# Since perf requires per-kernel image, this needs to be rebuilt periodically.
+# A docker build argument can be specified with the version of the kernel
+# (reported by `docker run --rm -it ubuntu:18.04 uname -r` without the
+# -linuxkit extension). The docker build argument can be specified with:
+# `docker build --build-arg kernel 3.14.1 . -f perf-Dockerfile -t perf:latest`
+#
+# Note that boot-time settings that affect the kernel are not implemented in
+# the container, and so if you wish to have runtime settings they need to be
+# done in the linuxkit kernel hypervisor
+
+FROM ubuntu:18.04 AS perf-builder
+
+RUN apt-get update && apt-get install -y git cmake clang gcc python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev autoconf libtool systemtap-sdt-dev libbsd-dev libunwind-dev zlib1g-dev rsync curl wget flex bison libssl-dev libelf-dev libaudit-dev libslang2-dev libnuma-dev linux-tools-generic linux-tools-common vim libdw-dev binutils-dev man libiberty-dev
+
+ARG kernel=4.19.76
+
+RUN mkdir /k
+
+WORKDIR /k
+
+# NB if building against Linux version 5 then this URL may need to be changed
+
+RUN curl -fSsL https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-${kernel}.tar.xz -o /k/kernel.tar.xz
+
+RUN tar -xf /k/kernel.tar.xz --strip-components 1
+
+RUN make -C /k/tools/perf
+
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y git cmake clang wget linux-tools-generic linux-tools-common vim binutils-dev man
+
+COPY --from=perf-builder /k/tools/perf/perf /usr/bin
+
+ENTRYPOINT [ "/usr/bin/perf" ]
