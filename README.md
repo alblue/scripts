@@ -35,4 +35,5 @@ Git hooks are available for certain commands; `command-pre-commit` can be
 symlinked into `.git/hooks/pre-commit` for example.
 
 * [ctags] - Generate ctags automatically when switching branches
+* [jq] - Command-line JSON processor
 * [shellcheck] - Provides a wrapper around Ubuntu's shellcheck

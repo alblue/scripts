@@ -1,0 +1,15 @@
+#!/usr/bin/env docker build . --tag jq:latest --file
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+
+FROM ubuntu:18.04
+
+RUN apt update && apt install -y jq && apt clean
+
+WORKDIR pwd
+
+ENTRYPOINT [ "jq" ]
