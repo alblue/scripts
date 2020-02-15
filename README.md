@@ -12,6 +12,14 @@ If you clone this repository and add the scripts to your PATH, please be aware
 that subsequent updates to this repository may cause (un)intentional changes.
 You should review updates and use them at your own risk.
 
+Docker scripts
+--------------
+
+* [dimages] - List images in helpful [drun] format for easy execution
+* [dkill] - Kill the most recent docker container
+* [drun] - Run a docker image with sane defaults and supporting ssh; see also [drun-README.md]
+* [dstop] - Stop the most recent docker container
+
 Scripts utilising Docker
 ------------------------
 

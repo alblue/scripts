@@ -1,0 +1,48 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Launches a docker container with some default arguments
+#
+# See [drun-README.md] for more information
+#
+# Usage:
+#
+#   drun [docker options] [image] [command line arguments]
+
+docker_user=${DOCKER_USER:-root}
+docker_workdir=${DOCKER_WORKDIR-/pwd}
+docker_mount=${DOCKER_MOUNT:-ro}
+
+# On Docker for Mac, sockets are not supported. Instead, there is a virtual
+# filesystem in the VM instance mounted under /run/host-services/ssh-auth.sock
+# As a result, if this is exposed via SSH_AUTH_SOCK in the instance, identities
+# should work as expected.
+# You would think -v $SSH_AUTH_SOCK:$SSH_AUTH_SOCK would work, but it doesn't.
+
+[ -e "${SSH_AUTH_SOCK}" ] && set -- \
+ --volume /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock \
+ --env SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock \
+ "$@"
+
+# We map the ~/.ssh directory in as read-only, to prevent accidental changes.
+# This may require setting UserKnownHostsFile to /dev/null to avoid warnings
+# when failing to update the hosts file, if used.
+
+[ -e "${HOME}/.ssh" ] && set -- \
+  --volume "${HOME}/.ssh:/${docker_user}/.ssh:ro" \
+ "$@"
+
+docker run \
+  --privileged \
+  --rm \
+  --interactive \
+  --tty \
+  --publish-all  \
+  --workdir "${docker_workdir}" \
+  --volume "$(pwd):${docker_workdir}:${docker_mount}" \
+  --user "${docker_user}" \
+  "$@"

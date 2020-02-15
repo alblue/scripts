@@ -1,0 +1,26 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Kills the last docker container lauched
+#
+# Usage:
+#
+#   dkill
+
+set -euo pipefail
+command=kill
+
+err() {
+	echo "$2" > /dev/stderr
+	exit "$1"
+}
+
+last_container=$(docker ps --filter status=running --last 1 --quiet)
+
+[ -z "${last_container}" ] && err "No last container found"
+
+docker exec -it "${last_container}" "${command}" "$@"

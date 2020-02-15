@@ -1,0 +1,14 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Generates a list of images in a format suitable for drun
+#
+# Usage:
+#
+#   dimages
+
+docker images --format 'drun {{.Repository}}:{{.Tag}}' "$@"| sort -n
