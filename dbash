@@ -21,6 +21,6 @@ err() {
 
 last_container=$(docker ps --filter status=running --last 1 --quiet)
 
-[ -z "${last_container}" ] && err "No last container found"
+[ -z "${last_container}" ] && err 1 "No last container found"
 
 docker exec -it "${last_container}" "${command}" "$@"
