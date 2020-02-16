@@ -15,10 +15,10 @@ You should review updates and use them at your own risk.
 Docker scripts
 --------------
 
-* [dimages] - List images in helpful [drun] format for easy execution
-* [dkill] - Kill the most recent docker container
-* [drun] - Run a docker image with sane defaults and supporting ssh; see also [drun-README.md]
-* [dstop] - Stop the most recent docker container
+* [dimages](dimages) - List images in helpful [drun] format for easy execution
+* [dkill](dkill) - Kill the most recent docker container
+* [drun](drun) - Run a docker image with sane defaults and supporting ssh; see also [drun-README.md]
+* [dstop](dstop) - Stop the most recent docker container
 
 Scripts utilising Docker
 ------------------------
@@ -34,7 +34,7 @@ images on first use.
 Git hooks are available for certain commands; `command-pre-commit` can be
 symlinked into `.git/hooks/pre-commit` for example.
 
-* [ctags] - Generate ctags automatically when switching branches
-* [jq] - Command-line JSON processor
-* [perf] - Allows perf commands to be run under a Docker image
-* [shellcheck] - Provides a wrapper around Ubuntu's shellcheck
+* [ctags](ctags) - Generate ctags automatically when switching branches
+* [jq](jq) - Command-line JSON processor
+* [perf](perf) - Allows perf commands to be run under a Docker image
+* [shellcheck](shellcheck) - Provides a wrapper around Ubuntu's shellcheck
