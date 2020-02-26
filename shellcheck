@@ -37,8 +37,8 @@ fi
 
 # If we haven't got the docker image available, build or pull it
 if ! docker image inspect "${image}" > /dev/null 2> /dev/null; then
-	if [ -r "${my_name}-Dockerfile" ]; then
-		docker build "${my_dir}" --rm --file "${my_name}-Dockerfile" --tag "${image}" > /dev/null 2> /dev/null
+    if [ -r "${my_dir}/${my_name}-Dockerfile" ]; then
+		docker build "${my_dir}" --rm --file "${my_dir}/${my_name}-Dockerfile" --tag "${image}" > /dev/null 2> /dev/null
 	else
 		docker pull "${image}"
 	fi
