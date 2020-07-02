@@ -1,0 +1,31 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+
+# Called after an update, to configure laptop appropriately
+
+# Stop WiFi spamming logs and restart
+grep -q /var/log /usr/share/sandbox/wifid.sb >/dev/null 2>/dev/null && (
+  sudo sed -i "" -e 's*/var/log*/var-log*' /usr/share/sandbox/wifid.sb
+  sudo killall airportd
+)
+grep -q /var/log /usr/share/sandbox/airportd.sb >/dev/null 2>/dev/null && (
+  sudo sed -i "" -e 's*/var/log*/var-log*' /usr/share/sandbox/airportd.sb
+  sudo killall airportd
+)
+
+# Enable touch-id on sudo
+grep -q pam_tid.so /etc/pam.d/sudo || sudo tee /etc/pam.d/sudo > /dev/null << HERE
+# sudo: auth account password session
+auth       sufficient     pam_tid.so
+auth       sufficient     pam_smartcard.so
+auth       required       pam_opendirectory.so
+account    required       pam_permit.so
+password   required       pam_deny.so
+session    required       pam_permit.so
+HERE
+
