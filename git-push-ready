@@ -1,0 +1,17 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Pushes a branch as ready for review in Gerrit
+#
+# Usage:
+#
+#   git push-ready
+#   git push-ready feature-branch
+
+branch=${1:-master}
+
+git push origin "HEAD:refs/for/${branch}%reday"

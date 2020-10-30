@@ -1,0 +1,17 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Pushes a work-in-progress review for Gerrit
+#
+# Usage:
+#
+#   git push-wip
+#   git push-wip feature-branch
+
+branch=${1:-master}
+
+git push origin "HEAD:refs/for/${branch}%wip"

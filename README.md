@@ -5,7 +5,7 @@ The scripts contained in this repository are mainly intended for use on macOS,
 by providing utilities that are not otherwise available on an out-of-the-box
 install. They either use Bash, Sh or Docker to achieve their goals.
 
-These scripts are provided with no warantee, express or implied, and are
+These scripts are provided with no warranty, express or implied, and are
 released under the MIT license.
 
 If you clone this repository and add the scripts to your PATH, please be aware
@@ -31,9 +31,6 @@ The associated `command-Dockerfile` contains the definition for building the
 docker image locally; these will be used to automatically populate the docker
 images on first use.
 
-Git hooks are available for certain commands; `command-pre-commit` can be
-symlinked into `.git/hooks/pre-commit` for example.
-
 * [ctags](ctags) - Generate ctags automatically when switching branches
 * [jq](jq) - Command-line JSON processor
 * [perf](perf) - Allows perf commands to be run under a Docker image
@@ -50,6 +47,8 @@ begins with `git-` can extend the functionality of your git environment.
 * [git-fixup](git-fixup) - Fixes up a previous commit
 * [git-foreach](git-foreach) - Executes command over submodules without stopping
 * [git-forget](git-forget) - Forgets local changes to a file for testing
+* [git-push-wip](git-push-wip) - Pushes a Gerrit change as a work-in-progress
+* [git-push-ready](git-push-ready) - Pushes a Gerrit change as ready for review
 
 Git hooks
 ---------
