@@ -1,0 +1,16 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Undoes changes to a file and resets it to HEAD
+#
+# Usage:
+#
+#   git undo mistake.txt
+
+set -eou pipefail
+
+git checkout -- "$@"

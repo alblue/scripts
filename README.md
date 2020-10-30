@@ -49,6 +49,7 @@ begins with `git-` can extend the functionality of your git environment.
 * [git-forget](git-forget) - Forgets local changes to a file for testing
 * [git-push-wip](git-push-wip) - Pushes a Gerrit change as a work-in-progress
 * [git-push-ready](git-push-ready) - Pushes a Gerrit change as ready for review
+* [git-undo](git-undo) - Undoes local changes to a file
 
 Git hooks
 ---------
