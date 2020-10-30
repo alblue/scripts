@@ -1,0 +1,22 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Iterates over submodules without stopping
+#
+# The `git submodule foreach` command iterates over every module, but
+# terminates at the fist sign of failure. In many cases, that's not required.
+# This executes the commands given, but in the case of the command having a
+# failure, will keep going.
+#
+# Usage:
+#
+#   git foreach git grep "needle"
+
+set -eou pipefail
+
+git submodule foreach "$* || :"
+
