@@ -1,0 +1,65 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Opens up the current commit in a web browser
+#
+# Redirects to GitHub where possible for known sites.
+#
+# Usage:
+#
+#   git browse
+#   git browse master
+#   BROWSER=firefox git browse HEAD^
+
+set -eou pipefail
+
+hash=${1:-HEAD}
+
+commit=$(git rev-parse "${hash}")
+
+url=$(git remote -v | awk -v commit="${commit}" -- '/origin/ && /fetch/ {
+  url = $2
+  gsub(":[0-9]+/", "/", url)
+  gsub("ssh://.*@", "https://", url)
+  gsub("git@", "https://", url)
+  gsub(".git$", "", url)
+  gsub("https://git.eclipse.org/[a-z]+/", "https://github.com/eclipse/", url)
+  if (index(url, "github.")) {
+    if (length(commit)) {
+      url = url "/commit/" commit
+    }
+  }
+  print url
+}')
+
+# Having found the URL, open it in a browser.
+#
+# The browser command may be specified with a BROWSER= variable
+#   BROWSER=firefox git browse
+#
+# On macOS, the `open` command will open a URL in the default browser
+# On other platforms, the Python webbrowser module will do the same
+# On some Linux versions, xdg-open will open the URL
+# If not, print out a message with the and then exit
+
+if [ -n "${BROWSER:-}" ]
+then
+	"${BROWSER}" "${url}"
+elif [ "Darwin" = "$(uname)" ]
+then
+	open "${url}"
+elif which -s python
+then
+	python -m webbrowser "${url}"
+elif which -s xdg-open
+then
+	xdg-open "${url}"
+else
+	echo "Unable to find a browser for your platform"
+	echo "Please set the BROWSER variable to an executable that can open URLs"
+	echo "${url}"
+fi

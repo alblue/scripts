@@ -46,4 +46,4 @@ Since you can use `git foo` to run a command `git-foo`, any shell script that
 begins with `git-` can extend the functionality of your git environment.
 
 * [git-all](git-all) - Executes the following git command on each subfolder
-
+* [git-browse](git-browse) - Open up the commit in a web browser
