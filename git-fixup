@@ -1,0 +1,37 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Fixes a commit in the git history
+#
+# If you've made a mistake in a past commit, you can fix it by creating a
+# 'fixup' commit, then rebasing from its parent. However, this is tedious to do
+# manually and error prone.
+#
+# This script does the hard work so you don't have to, by committing your
+# changes as a 'fixup', then performing the rebase on the correct parent.
+#
+# The interactive rebase will allow you to see waht the changes are, and allow
+# you to back out at that point anyway.
+#
+# Usage:
+#
+#   git fixup
+#   git fixup path/to/file
+#   git fixup HEAD^
+#   git fixup 962b5f9d45320c73001324b03a3b8a3c
+
+set -eou pipefail
+
+if [ -f "$1" ]
+then
+	git add "$1"
+	hash=$(git log --max-count=1 --format=%H -- "$1")
+else
+	hash=$(git rev-parse "${1:-HEAD}")
+fi
+git commit --fixup "${hash}"
+git rebase --autosquash --autostash --interactive "${hash}"^
