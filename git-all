@@ -1,0 +1,22 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Executes a command across all git subfolders
+#
+# Similar in intent to git-foreach, except without requiring the subfolders be
+# git modules.
+#
+# Usage:
+#
+#   git all pull
+
+set -eou pipefail
+
+for dir in *
+do
+	[ -e "$dir/.git" ] && echo "== $dir ==" && git -C "$dir" "$@"
+done

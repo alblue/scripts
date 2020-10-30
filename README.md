@@ -38,3 +38,12 @@ symlinked into `.git/hooks/pre-commit` for example.
 * [jq](jq) - Command-line JSON processor
 * [perf](perf) - Allows perf commands to be run under a Docker image
 * [shellcheck](shellcheck) - Provides a wrapper around Ubuntu's shellcheck
+
+Git commands
+------------
+
+Since you can use `git foo` to run a command `git-foo`, any shell script that
+begins with `git-` can extend the functionality of your git environment.
+
+* [git-all](git-all) - Executes the following git command on each subfolder
+
