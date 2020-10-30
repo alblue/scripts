@@ -50,3 +50,12 @@ begins with `git-` can extend the functionality of your git environment.
 * [git-fixup](git-fixup) - Fixes up a previous commit
 * [git-foreach](git-foreach) - Executes command over submodules without stopping
 * [git-forget](git-forget) - Forgets local changes to a file for testing
+
+Git hooks
+---------
+
+These hooks can be integrated into a git workflow for various operations. They
+can be symlinked (or copied) from the .git/hooks directory with the appropriate
+name.
+
+* [git-hook-no-fixup-pre-push](git-hook-no-fixup-pre-push) - Prevents pushing commits with WIP or fixup in the commit message
