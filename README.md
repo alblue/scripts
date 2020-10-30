@@ -49,3 +49,4 @@ begins with `git-` can extend the functionality of your git environment.
 * [git-browse](git-browse) - Open up the commit in a web browser
 * [git-fixup](git-fixup) - Fixes up a previous commit
 * [git-foreach](git-foreach) - Executes command over submodules without stopping
+* [git-forget](git-forget) - Forgets local changes to a file for testing

@@ -1,0 +1,27 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Forgets local changes to a given file
+#
+# This is an alias for git update-index --assume-unchanged
+#
+# When testing local changes against a file, it is sometimes desirable to make
+# local edits which don't need to be upstreamed. It is inconvenient to do this
+# on a case-by-case basis, so instead the `git forget` command can trick git
+# into thinking that the file hasn't been changed.
+#
+# When updating, if incoming changes are required then it will be necessary to
+# throw away the local changes to the file, using `git checkout -- file`.
+# Otherwise you might get conflicting changes.
+#
+# Usage:
+#
+#   git forget pom.xml
+
+set -eou pipefail
+
+git update-index --assume-unchanged "$@"
