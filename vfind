@@ -1,0 +1,17 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2020 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Find a file by name and then open it in vi (or custom editor)
+#
+# Usage:
+#
+#   vfind needle.txt
+
+editor=${EDITOR:-vi}
+file=$(find . -iname "$1")
+
+[ -r "${file}" ] && "${editor}" "${file}"
