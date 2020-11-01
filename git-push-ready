@@ -14,4 +14,4 @@
 
 branch=${1:-master}
 
-git push origin "HEAD:refs/for/${branch}%reday"
+git push origin "HEAD:refs/for/${branch}%ready"
