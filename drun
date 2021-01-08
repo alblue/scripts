@@ -37,12 +37,13 @@ docker_mount=${DOCKER_MOUNT:-ro}
  "$@"
 
 docker run \
-  --privileged \
-  --rm \
+  --init \
   --interactive \
+  --privileged \
+  --publish-all \
+  --rm \
   --tty \
-  --publish-all  \
-  --workdir "${docker_workdir}" \
-  --volume "$(pwd):${docker_workdir}:${docker_mount}" \
   --user "${docker_user}" \
+  --volume "$(pwd):${docker_workdir}:${docker_mount}" \
+  --workdir "${docker_workdir}" \
   "$@"
