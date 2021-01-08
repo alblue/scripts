@@ -18,5 +18,5 @@ set -eou pipefail
 
 for dir in *
 do
-	[ -e "$dir/.git" ] && echo "== $dir ==" && git -C "$dir" "$@"
+	( [ -e "$dir/.git" ] && echo "== $dir ==" && git -C "$dir" "$@" ) || true
 done
