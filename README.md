@@ -15,9 +15,9 @@ You should review updates and use them at your own risk.
 Docker scripts
 --------------
 
-* [dimages](dimages) - List images in helpful [drun] format for easy execution
+* [dimages](dimages) - List images in helpful [drun](drun) format for easy execution
 * [dkill](dkill) - Kill the most recent docker container
-* [drun](drun) - Run a docker image with sane defaults and supporting ssh; see also [drun-README.md]
+* [drun](drun) - Run a docker image with sane defaults and supporting ssh; see also [drun-README.md](drun-README.md)
 * [dstop](dstop) - Stop the most recent docker container
 
 Scripts utilising Docker
@@ -35,6 +35,7 @@ images on first use.
 * [jq](jq) - Command-line JSON processor
 * [perf](perf) - Allows perf commands to be run under a Docker image
 * [shellcheck](shellcheck) - Provides a wrapper around Ubuntu's shellcheck
+* [vfind](vfind) - Find a file and open it for editing in vi (or other editor)
 
 Git commands
 ------------
