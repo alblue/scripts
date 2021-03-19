@@ -34,4 +34,4 @@ else
 	hash=$(git rev-parse "${1:-HEAD}")
 fi
 git commit --fixup "${hash}"
-git rebase --autosquash --autostash --interactive "${hash}"^
+git -c sequence.editor=true rebase --autosquash --autostash --interactive "${hash}"^
