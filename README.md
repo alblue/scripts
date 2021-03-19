@@ -45,11 +45,12 @@ begins with `git-` can extend the functionality of your git environment.
 
 * [git-all](git-all) - Executes the following git command on each subfolder
 * [git-browse](git-browse) - Open up the commit in a web browser
+* [git-change](git-change) - Changes all copies of a pattern with a string
 * [git-fixup](git-fixup) - Fixes up a previous commit
 * [git-foreach](git-foreach) - Executes command over submodules without stopping
 * [git-forget](git-forget) - Forgets local changes to a file for testing
-* [git-push-wip](git-push-wip) - Pushes a Gerrit change as a work-in-progress
 * [git-push-ready](git-push-ready) - Pushes a Gerrit change as ready for review
+* [git-push-wip](git-push-wip) - Pushes a Gerrit change as a work-in-progress
 * [git-undo](git-undo) - Undoes local changes to a file
 
 Git hooks

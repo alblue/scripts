@@ -1,0 +1,20 @@
+#!/bin/sh
+# ---
+# Copyright (c) 2021 Alex Blewitt
+#
+# Released under the MIT License SPDX:MIT
+# See LICENSE.txt for more information
+# ---
+# Replaces all occurrences of a string with another
+#
+# Usage:
+#
+#   git change "pattern" "replacement"
+
+set -eou pipefail
+
+git grep -l "$1" | while IFS='' read -r file
+do
+	sed -i "" -e "s/$1/$2/g" "${file}"
+done
+
