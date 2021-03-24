@@ -70,11 +70,11 @@ next_version {
 
 jvm["home"] && /<\/dict>/ {
 	print("  <toolchain>")
-	if (jvm["version_short"]) print("    <id>JavaSE-" jvm["version_short"] "</id>")
 	print("    <type>jdk</type>")
 	print("    <provides>")
 	print("      <version>" jvm["version"] "</version>")
 	print("      <vendor>" jvm["vendor"] "</vendor>")
+	if (jvm["version_short"]) print("      <id>JavaSE-" jvm["version_short"] "</id>")
 	print("    </provides>")
 	print("    <configuration>")
 	print("      <jdkHome>" jvm["home"] "</jdkHome>")
