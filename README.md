@@ -61,3 +61,10 @@ can be symlinked (or copied) from the .git/hooks directory with the appropriate
 name.
 
 * [git-hook-no-fixup-pre-push](git-hook-no-fixup-pre-push) - Prevents pushing commits with WIP or fixup in the commit message
+
+Other utilities
+---------------
+
+These scripts provide useful functionality but don't fall into one of the categories above.
+
+* [macOS-mvn-toolchains.awk](macOS-mvn-toolchains.awk) - Generates a mvn `toolchains.xml` file from installed JVMs on macOS
