@@ -21,7 +21,8 @@ do
     shebang=$(head -c 2 "${file}")
     if [ "${shebang}" = "#!" ]
     then
-	  set -- "$@" "${file}"
+      # Shellcheck only supports sh, bash, ksh, and dash as per SC1071
+      head -n 1 "${file}" | grep -q -E '/(da|k|ba)?sh' && set -- "$@" "${file}"
     fi
   fi
 done
