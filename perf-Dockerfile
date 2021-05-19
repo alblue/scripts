@@ -1,6 +1,6 @@
 #!/usr/bin/env docker build . --tag perf:latest --file
 # ---
-# Copyright (c) 2020 Alex Blewitt
+# Copyright (c) 2021 Alex Blewitt
 #
 # Released under the MIT License SPDX:MIT
 # See LICENSE.txt for more information
@@ -19,7 +19,7 @@
 
 FROM ubuntu:20.04 AS perf-builder
 
-RUN apt-get update && apt-get install -y git cmake clang gcc python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev autoconf libtool systemtap-sdt-dev libbsd-dev libunwind-dev zlib1g-dev rsync curl wget flex bison libssl-dev libelf-dev libaudit-dev libslang2-dev libnuma-dev linux-tools-generic linux-tools-common vim libdw-dev binutils-dev man libiberty-dev
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git cmake clang gcc python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev autoconf libtool systemtap-sdt-dev libbsd-dev libunwind-dev zlib1g-dev rsync curl wget flex bison libssl-dev libelf-dev libaudit-dev libslang2-dev libnuma-dev linux-tools-generic linux-tools-common vim libdw-dev binutils-dev man libiberty-dev
 
 ARG kernel=4.19.76
 
