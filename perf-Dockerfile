@@ -9,7 +9,7 @@
 #
 # Since perf requires per-kernel image, this needs to be rebuilt periodically.
 # A docker build argument can be specified with the version of the kernel
-# (reported by `docker run --rm -it ubuntu:18.04 uname -r` without the
+# (reported by `docker run --rm -it ubuntu:20.04 uname -r` without the
 # -linuxkit extension). The docker build argument can be specified with:
 # `docker build --build-arg kernel 3.14.1 . -f perf-Dockerfile -t perf:latest`
 #
@@ -17,7 +17,7 @@
 # the container, and so if you wish to have runtime settings they need to be
 # done in the linuxkit kernel hypervisor
 
-FROM ubuntu:18.04 AS perf-builder
+FROM ubuntu:20.04 AS perf-builder
 
 RUN apt-get update && apt-get install -y git cmake clang gcc python uuid-dev libicu-dev icu-devtools libbsd-dev libedit-dev libxml2-dev libsqlite3-dev swig libpython-dev libncurses5-dev pkg-config libblocksruntime-dev libcurl4-openssl-dev autoconf libtool systemtap-sdt-dev libbsd-dev libunwind-dev zlib1g-dev rsync curl wget flex bison libssl-dev libelf-dev libaudit-dev libslang2-dev libnuma-dev linux-tools-generic linux-tools-common vim libdw-dev binutils-dev man libiberty-dev
 
@@ -35,7 +35,7 @@ RUN tar -xf /k/kernel.tar.xz --strip-components 1
 
 RUN make -C /k/tools/perf
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y git cmake clang wget linux-tools-generic linux-tools-common vim binutils-dev man
 
