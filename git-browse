@@ -17,20 +17,37 @@
 
 set -eou pipefail
 
-hash=${1:-HEAD}
+file_or_commit=${1:-HEAD}
 
-commit=$(git rev-parse "${hash}")
+if [ -e "${file_or_commit}" ]; then
+  file=${file_or_commit}
+  full=$(pwd)/$file
+  root=$(git rev-parse --show-toplevel)
+  file=${full#${root}}
+  commit=$(git rev-parse HEAD)
+else
+  file=""
+  commit=$(git rev-parse "${file_or_commit}")
+fi
 
-url=$(git remote -v | awk -v commit="${commit}" -- '/origin/ && /fetch/ {
+url=$(git remote -v | awk -v file="${file}" -v commit="${commit}" -- '/origin/ && /fetch/ {
   url = $2
   gsub(":[0-9]+/", "/", url)
   gsub("ssh://.*@", "https://", url)
   gsub("git@", "https://", url)
   gsub(".git$", "", url)
   gsub("https://git.eclipse.org/[a-z]+/", "https://github.com/eclipse/", url)
-  if (index(url, "github.")) {
-    if (length(commit)) {
+  if (length(file)) {
+    if (index(url, "github.")) {
+      url = url "/blob/" commit "/" file
+    } else if (index(url, "gitlab.")) {
+      url = url "/-/blob/" commit "/" file
+    }
+  } else if (length(commit)) {
+    if (index(url, "github.")) {
       url = url "/commit/" commit
+    } else if (index(url, "gitlab.")) {
+      url = url "/-/commit/" commit
     }
   }
   print url
