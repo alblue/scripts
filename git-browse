@@ -1,6 +1,6 @@
 #!/bin/sh
 # ---
-# Copyright (c) 2020 Alex Blewitt
+# Copyright (c) 2022 Alex Blewitt
 #
 # Released under the MIT License SPDX:MIT
 # See LICENSE.txt for more information
@@ -34,6 +34,7 @@ url=$(git remote -v | awk -v file="${file}" -v commit="${commit}" -- '/origin/ &
   url = $2
   gsub(":[0-9]+/", "/", url)
   gsub("ssh://.*@", "https://", url)
+  gsub("git@github.com:", "https://github.com/", url)
   gsub("git@", "https://", url)
   gsub(".git$", "", url)
   gsub("https://git.eclipse.org/[a-z]+/", "https://github.com/eclipse/", url)
